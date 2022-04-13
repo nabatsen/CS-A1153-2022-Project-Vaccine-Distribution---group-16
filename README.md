@@ -3,13 +3,14 @@
 ## Getting started
 Here's a list of recommended next steps to make it easy for you to get started with GitLab. However, understanding the concept of git workflow and git fork is essential. 
 
-- [ ] [Create a fork](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#creating-a-fork)
+- [ ] [Create a fork of this official repository](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#creating-a-fork)
 - [ ] Clone the fork to your local repository
 ```
 git clone git@version.aalto.fi:cs-a1153_databases_projects/project-vaccine-distribution.git
 ```
 - [ ] [Add a remote to keep your fork synced with the official repository](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#repository-mirroring)
 - [ ] [update files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line)
+
 - Review your code on commits page
 - Create a merge request
 - Your team lead reviews the code and merges it to the main branch.
