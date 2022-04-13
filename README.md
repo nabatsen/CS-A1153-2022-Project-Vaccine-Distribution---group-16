@@ -1,24 +1,32 @@
 # Project Vaccine Distribution
 
-
-
 ## Getting started
+Here's a list of recommended next steps to make it easy for you to get started with GitLab. However, understanding the concept of git workflow and git fork is essential. 
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
+- [ ] [Create a fork](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html)
+- [ ] Clone the fork to your local repository
 ```
-cd existing_repo
-git remote add origin https://version.aalto.fi/gitlab/cs-a1153_databases_projects/project-vaccine-distribution.git
-git branch -M main
-git push -uf origin main
+git clone git@version.aalto.fi:cs-a1153_databases_projects/project-vaccine-distribution.git
 ```
+- [ ] [Add a remote to keep your fork synced with the official repository](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html)
+- [ ] [update files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line)
+```
+git checkout -b feature_name # Edit some code 
+git commit -am "Add some feature"
+git push origin feature_name
+```
+- Review your code on commits page
+- Create a merge request
+- Your team lead reviews the code and merges it to the main branch.
+
+## Keep the fork synced with the official repository
+- [ ] Option 1: Use git remote add upstream.
+```
+git remote add upstream git@version.aalto.fi:cs-a1153_databases_projects/project-vaccine-distribution.git
+git pull upstream main # if the official repository is updated you must pull the upstream
+git push origin main # Update your public repository
+```
+- [ ]Option2: You can use [repository mirroring](https://about.gitlab.com/blog/2016/12/01/how-to-keep-your-fork-up-to-date-with-its-origin/)to make sure that your remote fork is automatically kept up-to-date.
 
 ## Integrate with your tools
 
