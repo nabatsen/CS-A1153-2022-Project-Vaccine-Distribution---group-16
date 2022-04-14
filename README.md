@@ -18,9 +18,6 @@ This section explains which file goes under which folder. It's important to uplo
     ├── database                          # IMPORTANT: see NOTES below
     │   ├── .gitignore
     │   ├── vaccine.db                    # final version of Vaccine Distribution database
-    ├── project instruction               # This folder will be updated once a new part is published
-    │   ├── partI.pdf
-    │   ├── ...
     ├── report                            # Submit report for the relevant part
     │   ├── partI.pdf
     │   ├── ....
@@ -45,39 +42,25 @@ This section explains which file goes under which folder. It's important to uplo
 
 ## How to work with git
 
-Here's a list of recommended next steps to make it easy for you to get started with GitLab. However, understanding the concept of git workflow and git fork is essential. 
+Here's a list of recommended next steps to make it easy for you to get started with project. However, understanding the concept of git workflow and git fork is essential. 
 
-- [ ] [Create a fork of this official repository](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#creating-a-fork)
-- [ ] Clone the fork to your local repository
+-   [Create a fork of this official repository](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#creating-a-fork)
+-   [Add a SSH key to your gitlab account](https://docs.gitlab.com/ee/user/ssh.html#add-an-ssh-key-to-your-gitlab-account)
+-   Clone the fork to your local repository
 ```
 git clone git@version.aalto.fi:cs-a1153_databases_projects/project-vaccine-distribution.git
 ```
-- [ ] [Add a remote to keep your fork synced with the official repository](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#repository-mirroring)
-- [ ] [update files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line)
-
-- Review your code on commits page
-- Create a merge request
-- Your team lead reviews the code and merges it to the main branch.
-
-## Keep the fork synced with the official repository
-- [ ] Option 1: Use git remote add upstream.
+-   [Add a remote to keep your fork synced with the official repository](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#repository-mirroring)
 ```
 git remote add upstream git@version.aalto.fi:cs-a1153_databases_projects/project-vaccine-distribution.git
-git pull upstream main # if the official repository is updated you must pull the upstream
-git push origin main # Update your public repository
+git pull upstream main                                  # if the official repository is updated you must pull the upstream
+git push origin main                                    # Update your public repository
 ```
-- [ ] Option2: You can use [repository mirroring](https://about.gitlab.com/blog/2016/12/01/how-to-keep-your-fork-up-to-date-with-its-origin/)to make sure that your remote fork is automatically kept up-to-date.
 
-## Integrate with your tools
+### Git guideline
+-   [Feature branch workflow](https://docs.gitlab.com/ee/gitlab-basics/feature_branch_workflow.html)
+-   [Feature branch development](https://docs.gitlab.com/ee/topics/git/feature_branch_development.html)
+-   [Add files to git repository](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line)
 
-- [ ] [Set up project integrations](https://version.aalto.fi/gitlab/cs-a1153_databases_projects/project-vaccine-distribution/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
 
 ## (ADVANCED OPTION) How to work with Postgres (Sophie & Ezra)
