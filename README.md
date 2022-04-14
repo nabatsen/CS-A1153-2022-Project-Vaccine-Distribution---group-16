@@ -1,6 +1,50 @@
 # Project Vaccine Distribution
 
-## Getting started
+This repository provides a basic structure for collaborating with your teammates on project Vaccine Distribution. Read the following content carefully to understand the file structure as well as how to work with git and SQLite. 
+
+## File structure
+This section explains which file goes under which folder. It's important to upload your code and report to the right folder so that TAs can easily find them for grading
+
+    .project-vaccine-distribution
+    ├── code                              # Submit code required to run the code for project part II & III
+    │   ├── .gitignore
+    │   ├── requirements.txt              # IMPORTANT: see NOTES below
+    │   ├── part2.py                      # python file for part II
+    │   ├── part3.py                      # python file for part III
+    │   ├── part2.sql                     # sql file for part II
+    │   ├── part3.sql                     # sql file for part III
+    ├── data                              # contain the sample data for Vaccine Distribution projects
+    │   ├── sampleData.xls                # sample data as an excel file
+    ├── database                          # IMPORTANT: see NOTES below
+    │   ├── .gitignore
+    │   ├── vaccine.db                    # final version of Vaccine Distribution database
+    ├── project instruction               # This folder will be updated once a new part is published
+    │   ├── partI.pdf
+    │   ├── ...
+    ├── report                            # Submit report for the relevant part
+    │   ├── partI.pdf
+    │   ├── ....
+    └── README.md
+
+### NOTES:
+1. **requirements.txt**
+
+    In order to keep track of Python modules and packages required by your project, we provided a ```requirements.txt``` file with some starter packages required for data preprocessing. You can install these packages by running ```pip install -r requirements.txt```. Please add additional packages that you install for the project to this file. 
+
+2. **(DEFAULT OPTION) SQLite database**
+
+    Most SQL database engines are are client/server based such as PostgreSQL, MySQL, etc. Client/server SQL database engines strive to implement a shared repository of data. They support scalability, concurrency, centralization, and control. 
+    
+    SQLite is an serverless database. It is designed to provide **local data storage** for individual applications and devices. SQLite supports an unlimited number of simultaneous readers, but it will only allow one writer at any instant in time.
+    
+    Read more: [SQLite Is Serverless](https://sqlite.org/serverless.html) and [Appropriate Uses For SQLite](https://www.sqlite.org/whentouse.html)
+
+    In order to avoid git conflicts when multiple team members write to a shared database, it is advisable that each team member creates their own project database on local machine for testing. You can skip pushing the SQLite database to group repository by adding ```project_database.db``` file to ```.gitignore```. In development phase, you only need to push the code for creating and querying the database. The code updates will only affect your local database.
+
+    Once there are no need to edit the database file, you can push it to group repository, under database folder. 
+
+## How to work with git
+
 Here's a list of recommended next steps to make it easy for you to get started with GitLab. However, understanding the concept of git workflow and git fork is essential. 
 
 - [ ] [Create a fork of this official repository](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#creating-a-fork)
@@ -36,61 +80,4 @@ git push origin main # Update your public repository
 - [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
 - [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
 
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## (ADVANCED OPTION) How to work with Postgres (Sophie & Ezra)
