@@ -1,5 +1,5 @@
 # Project Vaccine Distribution
-This repository provides a basic structure for collaborating with your teammates on project Dairy Farm. Read the following content carefully to understand the file structure as well as how to work with git and SQLite. 
+This repository provides a basic structure for collaborating with your teammates on project Vaccine Distribution. Read the following content carefully to understand the file structure as well as how to work with git and SQLite. 
 
 ## File structure
 This section explains which file goes under which folder. It's important to upload your code and report to the right folder so that TAs can easily find them for grading
@@ -12,7 +12,7 @@ This section explains which file goes under which folder. It's important to uplo
     │   ├── part3.py                      # python file for part III
     │   ├── part2.sql                     # sql file for part II
     │   ├── part3.sql                     # sql file for part III
-    ├── data                              # contain the sample data for Dairy Farm projects
+    ├── data                              # contain the sample data for Vaccine Distribution projects
     │   ├── sampleData.xls                # sample data as an excel file
     ├── database                          # IMPORTANT: see NOTES below
     │   ├── .gitignore
