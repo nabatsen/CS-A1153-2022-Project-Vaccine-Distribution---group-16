@@ -37,6 +37,7 @@ This section explains which file goes under which folder. It's important to uplo
 
     Once there are no need to edit the database file, you can push it to group repository, under database folder. 
 3. **(ADVANCED OPTION) How to work with Postgres**
+
     Although A+ exercises and Group Projects can be done on SQLite, we offer PostgreSQL as an advanced alternative for students who want to learn more about client/server-based databases. This alternative is only for group projects. 
     
     PostgresSQL can have a different query syntax than SQLite. It's advisable for those who choose to work with PostgreSQL to browse thorugh the [documentation](https://www.postgresql.org/docs/) or watch this [tutorial](https://www.youtube.com/watch?v=qw--VYLpxG4). 
