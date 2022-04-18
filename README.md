@@ -59,7 +59,7 @@ This section explains which file goes under which folder. It's important to uplo
     In order to avoid git conflicts when multiple team members write to a shared database, it is advisable that each team member creates their own project database on local machine for testing. You can skip pushing the SQLite database to group repository by adding ```project_database.db``` file to ```.gitignore```. In development phase, you only need to push the code for creating and querying the database. The code updates will only affect your local database.
 
     Once there are no need to edit the database file, you can push it to group repository, under database folder. 
-3. **(ADVANCED OPTION) How to work with Postgres**
+3. **(ADVANCED OPTION) PostgreSQL**
 
     Although A+ exercises and Group Projects can be done on SQLite, we offer PostgreSQL as an advanced alternative for students who want to learn more about client/server-based databases. This alternative is only for group projects. 
     
