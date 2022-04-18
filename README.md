@@ -1,8 +1,31 @@
 # Project Vaccine Distribution
 This repository provides a basic structure for collaborating with your teammates on project Vaccine Distribution. Read the following content carefully to understand the file structure as well as how to work with git and SQLite. 
 
+## How to work with git
+
+Here's a list of recommended next steps to make it easy for you to get started with the project. However, understanding the concept of git workflow and git fork is necessary and essential. 
+
+-   [Create a fork of this official repository](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#creating-a-fork)
+-   [Add a SSH key to your gitlab account](https://docs.gitlab.com/ee/user/ssh.html#add-an-ssh-key-to-your-gitlab-account)
+-   Clone the fork to your local repository
+```
+git clone git@version.aalto.fi:cs-a1153_databases_projects/project-vaccine-distribution.git
+```
+-   [Add a remote to keep your fork synced with the official repository](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#repository-mirroring)
+```
+git remote add upstream git@version.aalto.fi:cs-a1153_databases_projects/project-vaccine-distribution.git
+git pull upstream main                                  # if the official repository is updated you must pull the upstream
+git push origin main                                    # Update your public repository
+```
+
+### Git guideline
+-   [Feature branch workflow](https://docs.gitlab.com/ee/gitlab-basics/feature_branch_workflow.html)
+-   [Feature branch development](https://docs.gitlab.com/ee/topics/git/feature_branch_development.html)
+-   [Add files to git repository](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line)
+
+
 ## File structure
-This section explains which file goes under which folder. It's important to upload your code and report to the right folder so that TAs can easily find them for grading
+This section explains which file goes under which folder. It's important to upload your code and report to the right folder so that TAs can easily find them for grading.
 
     .project-vaccine-distribution
     ├── code                              # Submit code required to run the code for project part II & III
@@ -42,28 +65,6 @@ This section explains which file goes under which folder. It's important to uplo
     
     PostgresSQL can have a different query syntax than SQLite. It's advisable for those who choose to work with PostgreSQL to browse thorugh the [documentation](https://www.postgresql.org/docs/) or watch this [tutorial](https://www.youtube.com/watch?v=qw--VYLpxG4). 
     
-
-## How to work with git
-
-Here's a list of recommended next steps to make it easy for you to get started with the project. However, understanding the concept of git workflow and git fork is necessary and essential. 
-
--   [Create a fork of this official repository](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#creating-a-fork)
--   [Add a SSH key to your gitlab account](https://docs.gitlab.com/ee/user/ssh.html#add-an-ssh-key-to-your-gitlab-account)
--   Clone the fork to your local repository
-```
-git clone git@version.aalto.fi:cs-a1153_databases_projects/project-vaccine-distribution.git
-```
--   [Add a remote to keep your fork synced with the official repository](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#repository-mirroring)
-```
-git remote add upstream git@version.aalto.fi:cs-a1153_databases_projects/project-vaccine-distribution.git
-git pull upstream main                                  # if the official repository is updated you must pull the upstream
-git push origin main                                    # Update your public repository
-```
-
-### Git guideline
--   [Feature branch workflow](https://docs.gitlab.com/ee/gitlab-basics/feature_branch_workflow.html)
--   [Feature branch development](https://docs.gitlab.com/ee/topics/git/feature_branch_development.html)
--   [Add files to git repository](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line)
 
 
 
