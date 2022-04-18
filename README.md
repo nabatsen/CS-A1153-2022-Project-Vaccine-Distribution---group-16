@@ -6,7 +6,6 @@ This section explains which file goes under which folder. It's important to uplo
 
     .project-vaccine-distribution
     ├── code                              # Submit code required to run the code for project part II & III
-    │   ├── .gitignore
     │   ├── requirements.txt              # IMPORTANT: see NOTES below
     │   ├── part2.py                      # python file for part II
     │   ├── part3.py                      # python file for part III
@@ -15,16 +14,16 @@ This section explains which file goes under which folder. It's important to uplo
     ├── data                              # contain the sample data for Vaccine Distribution projects
     │   ├── sampleData.xls                # sample data as an excel file
     ├── database                          # IMPORTANT: see NOTES below
-    │   ├── .gitignore
     │   ├── vaccineDistribution.db        # final version of Vaccine Distribution database
     ├── report                            # Submit report for the relevant part
     │   ├── partI.pdf
     │   ├── ....
+    ├── .gitignore
     └── README.md
 
 1. **requirements.txt**
 
-    In order to keep track of Python modules and packages required by your project, we provided a ```requirements.txt``` file with some starter packages required for data preprocessing. You can install these packages by running ```pip install -r requirements.txt```. Please add additional packages that you install for the project to this file. 
+    In order to keep track of Python modules and packages required by your project, we provided a ```requirements.txt``` file with some starter packages required for data preprocessing. You can install these packages by running ```pip install -r ./code/requirements.txt```. Please add additional packages that you install for the project to this file. 
 
 2. **(DEFAULT OPTION) SQLite database**
 
@@ -37,10 +36,15 @@ This section explains which file goes under which folder. It's important to uplo
     In order to avoid git conflicts when multiple team members write to a shared database, it is advisable that each team member creates their own project database on local machine for testing. You can skip pushing the SQLite database to group repository by adding ```project_database.db``` file to ```.gitignore```. In development phase, you only need to push the code for creating and querying the database. The code updates will only affect your local database.
 
     Once there are no need to edit the database file, you can push it to group repository, under database folder. 
+3. **(ADVANCED OPTION) How to work with Postgres**
+    Although A+ exercises and Group Projects can be done on SQLite, we offer PostgreSQL as an advanced alternative for students who want to learn more about client/server-based databases. This alternative is only for group projects. 
+    
+    PostgresSQL can have a different query syntax than SQLite. It's advisable for those who choose to work with PostgreSQL to browse thorugh the [documentation](https://www.postgresql.org/docs/) or watch this [tutorial](https://www.youtube.com/watch?v=qw--VYLpxG4). 
+    
 
 ## How to work with git
 
-Here's a list of recommended next steps to make it easy for you to get started with project. However, understanding the concept of git workflow and git fork is essential. 
+Here's a list of recommended next steps to make it easy for you to get started with the project. However, understanding the concept of git workflow and git fork is necessary and essential. 
 
 -   [Create a fork of this official repository](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#creating-a-fork)
 -   [Add a SSH key to your gitlab account](https://docs.gitlab.com/ee/user/ssh.html#add-an-ssh-key-to-your-gitlab-account)
@@ -61,4 +65,4 @@ git push origin main                                    # Update your public rep
 -   [Add files to git repository](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line)
 
 
-## (ADVANCED OPTION) How to work with Postgres (Sophie & Ezra)
+
