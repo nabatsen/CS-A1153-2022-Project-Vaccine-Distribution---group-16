@@ -33,7 +33,6 @@ try:
 
 except Exception as error:
     print(error)
-    print("what the fuck")
 finally:
     if cur is not None:
         cur.close()

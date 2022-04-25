@@ -9,7 +9,7 @@ Here's a list of recommended next steps to make it easy for you to get started w
 -   [Add a SSH key to your gitlab account](https://docs.gitlab.com/ee/user/ssh.html#add-an-ssh-key-to-your-gitlab-account)
 -   Clone the fork to your local repository
 ```
-git clone git@version.aalto.fi:cs-a1153_databases_projects/project-vaccine-distribution.git
+git clone git@version.aalto.fi<your-group-name>/project-vaccine-distribution.git
 ```
 -   [Add a remote to keep your fork synced with the official repository](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#repository-mirroring)
 ```
@@ -23,6 +23,47 @@ git push origin main                                    # Update your public rep
 -   [Feature branch development](https://docs.gitlab.com/ee/topics/git/feature_branch_development.html)
 -   [Add files to git repository](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line)
 
+
+## Create a virtual environment
+### MacOS/Linux 
+**Method 1**
+```
+# You may need to install python3-venv
+sudo apt-get install python3-venv   # note: this cannot be used in Aalto VM due to the lack of sudo right. 
+
+# Move to the project root folder
+cd project-vaccine-distribution
+
+# Create a virtual environment 
+python3 -m venv venv
+
+# Activate the virtual environment
+source venv/bin/activate
+(venv) $
+```
+
+**Method 2**
+```
+# You can use virtualenv instead
+python3 -m pip install --user virtualenv # Use this if you are using Aalto VM.
+
+cd project-vaccine-distribution
+# Create a virtual environment 
+virtualenv venv
+source venv/bin/activate
+(venv) $
+
+```
+### Windows
+You may need to install and create an environment similar to the above. However, it should be noted that you activate the environment differently, as shown below. 
+```
+venv\Scripts\Activate.ps1
+```
+### Deactivate
+You can deactivate the virtual environment with this command.
+```
+deactivate
+```
 
 ## File structure
 This section explains which file goes under which folder. It's important to upload your code and report to the right folder so that TAs can easily find them for grading.
@@ -51,7 +92,7 @@ This section explains which file goes under which folder. It's important to uplo
 
 1. **requirements.txt**
 
-    In order to keep track of Python modules and packages required by your project, we provided a ```requirements.txt``` file with some starter packages required for data preprocessing. You can install these packages by running ```pip install -r ./code/requirements.txt```. Please add additional packages that you install for the project to this file. 
+    In order to keep track of Python modules and packages required by your project, we provided a ```requirements.txt``` file with some starter packages required for data preprocessing. After activating the virtual environment, you can install these packages by running ```pip install -r ./code/requirements.txt```. Please add additional packages that you install for the project to this file. 
 
 2. **(DEFAULT OPTION) SQLite database**
 
