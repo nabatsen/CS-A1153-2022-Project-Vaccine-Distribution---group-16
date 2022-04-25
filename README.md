@@ -24,42 +24,33 @@ git push origin main                                    # Update your public rep
 -   [Add files to git repository](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line)
 
 
-## Create a virtual environment
-### MacOS/Linux 
-**Method 1**
+## How to work with virtual environment
+**MacOS/Linux - Method 1**
 ```
-# You may need to install python3-venv
-sudo apt-get install python3-venv   # note: this cannot be used in Aalto VM due to the lack of sudo right. 
-
-# Move to the project root folder
-cd project-vaccine-distribution
-
-# Create a virtual environment 
-python3 -m venv venv
-
-# Activate the virtual environment
-source venv/bin/activate
-(venv) $
+sudo apt-get install python3-venv           # Note: this cannot be used in Aalto VM due to the lack of sudo right. 
+cd project-vaccine-distribution             # Move to the project root folder
+python3 -m venv venv                        # Create a virtual environment 
+source venv/bin/activate                    # Activate the virtual environment
+(venv) $                                    # You see the name of the virtual environment in the parenthesis.
 ```
 
-**Method 2**
+**MacOS/Linux - Method 2**
 ```
-# You can use virtualenv instead
-python3 -m pip install --user virtualenv # Use this if you are using Aalto VM.
-
-cd project-vaccine-distribution
-# Create a virtual environment 
-virtualenv venv
-source venv/bin/activate
-(venv) $
+python3 -m pip install --user virtualenv    # You can use virtualenv instead, if you are using Aalto VM.
+cd project-vaccine-distribution             # Move to the project root folder
+virtualenv venv                             # Create a virtual environment 
+source venv/bin/activate                    # Activate the virtual environment
+(venv) $                                    # You see the name of the virtual environment in the parenthesis.
 
 ```
-### Windows
-You may need to install and create an environment similar to the above. However, it should be noted that you activate the environment differently, as shown below. 
+**Windows**
+
+You can install and create a virtual environment similar to the above. However, it should be noted that you activate the environment differently, as shown below. 
 ```
 venv\Scripts\Activate.ps1
 ```
-### Deactivate
+**Deactivate**  
+
 You can deactivate the virtual environment with this command.
 ```
 deactivate
