@@ -41,6 +41,11 @@ This section explains which file goes under which folder. It's important to uplo
     ├── report                            # Submit report for the relevant part
     │   ├── partI.pdf
     │   ├── ....
+    ├── venv                              # Virtual environment
+    │   ├── bin
+    │   │   ├── activate
+    │   │   ├── ....
+    │   ├── ....
     ├── .gitignore
     └── README.md
 
