@@ -57,23 +57,18 @@ deactivate
 ```
 
 ## File structure
-This section explains which file goes under which folder. It's important to upload your code and report to the right folder so that TAs can easily find them for grading.
+This section explains the recommended file structure for the project
 
     .project-vaccine-distribution
-    ├── code                              # Submit code required to run the code for project part II & III
+    ├── code                              # code base (python & sql files)
     │   ├── requirements.txt              # IMPORTANT: see NOTES below
-    │   ├── part2.py                      # python file for part II
-    │   ├── part3.py                      # python file for part III
-    │   ├── part2.sql                     # sql file for part II
-    │   ├── part3.sql                     # sql file for part III
+    │   ├── test_postgresql_conn.py       # Example code to test connection with postgres server
+    │   ├── ....py                        # python file for part III
     ├── data                              # contain the sample data for Vaccine Distribution projects
     │   ├── sampleData.xls                # sample data as an excel file
     ├── database                          # IMPORTANT: see NOTES below
-    │   ├── vaccineDistribution.db        # final version of Vaccine Distribution database
-    ├── report                            # Submit report for the relevant part
-    │   ├── partI.pdf
-    │   ├── ....
-    ├── venv                              # Virtual environment
+    │   ├── database.db                   # final version of the project database
+    ├── venv                              # path to venv should be added to .gitignore
     │   ├── bin
     │   │   ├── activate
     │   │   ├── ....
