@@ -9,7 +9,7 @@ Here's a list of recommended next steps to make it easy for you to get started w
 -   [Add a SSH key to your gitlab account](https://docs.gitlab.com/ee/user/ssh.html#add-an-ssh-key-to-your-gitlab-account)
 -   Clone the fork to your local repository
 ```
-git clone git@version.aalto.fi<your-group-name>/project-vaccine-distribution.git
+git clone git@version.aalto.fi<your-teammate-name>/<project-repo-name>.git
 ```
 -   [Add a remote to keep your fork synced with the official repository](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html#repository-mirroring)
 ```
