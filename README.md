@@ -91,6 +91,7 @@ This section explains the recommended file structure for the project
     In order to avoid git conflicts when multiple team members write to a shared database, it is advisable that each team member creates their own project database on local machine for testing. You can skip pushing the SQLite database to group repository by adding ```project_database.db``` file to ```.gitignore```. In development phase, you only need to push the code for creating and querying the database. The code updates will only affect your local database.
 
     Once there are no need to edit the database file, you can push it to group repository, under database folder. 
+    
 3. **(ADVANCED OPTION) PostgreSQL**
 
     Although A+ exercises and Group Projects can be done on SQLite, we offer PostgreSQL as an advanced alternative for students who want to learn more about client/server-based databases. This alternative is only for group projects. 
@@ -105,6 +106,6 @@ This section explains the recommended file structure for the project
 
     Once you are inside an Aalto's network (either though VPN or vdi) and have cloned the project to (either to your machine or an Aalto virtual machine), you will need to ```activate``` the virtual environment [see here](#how-to-work-with-virtual-environment), and install the required library (e.g. from the project root folder, run ```pip install -r ./code/requirements.txt```)
 
-    Finally, you can test the connection with the test_db by running ```python code/test_postgresql_conn.py``` from the project root folder. For your group database, we will share the "database" name, "user" and "password" information when Project Part 2 opens. 
+    Finally, you can test the connection with the test_db by running ```python ./code/test_postgresql_conn.py``` from the project root folder. For your group database, we will share the "database" name, "user" and "password" information when Project Part 2 opens. 
 
 
