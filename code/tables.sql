@@ -35,7 +35,6 @@ CREATE TABLE VaccinationPoint(
     phone VARCHAR NOT NULL
 );
 
-
 CREATE TABLE Batch(
     id VARCHAR PRIMARY KEY,
     vaccine VARCHAR NOT NULL REFERENCES Vaccine(id) ON UPDATE CASCADE,
@@ -68,12 +67,9 @@ CREATE TABLE Employee(
 CREATE DOMAIN WeekdayDomain VARCHAR CHECK(VALUE IN ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'));
 
 CREATE TABLE Shift(
-    vaccinationPoint VARCHAR REFERENCES VaccinationPoint(name)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
     weekday WeekdayDomain,
     employee VARCHAR REFERENCES Employee(ssNo) ON DELETE CASCADE,
-    PRIMARY KEY(vaccinationPoint,weekday,employee)
+    PRIMARY KEY(weekday,employee)
 );
 
 CREATE TABLE VaccinationEvent(

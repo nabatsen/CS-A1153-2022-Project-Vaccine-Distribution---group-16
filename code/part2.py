@@ -31,10 +31,24 @@ def main():
         sheets["VaccineType"] = vaccine_type_df
 
         sheets["VaccineBatch"]["amount"] = sheets["VaccineBatch"]["amount"].astype(int)
+        sheets["VaccineBatch"]["manufDate"] = sheets["VaccineBatch"]["manufDate"].astype(str)
+        sheets["VaccineBatch"]["expiration"] = sheets["VaccineBatch"]["expiration"].astype(str)
+
+        sheets["Transportation log"]["dateArr"] = sheets["Transportation log"]["dateArr"].astype(str)
+        sheets["Transportation log"]["dateDep"] = sheets["Transportation log"]["dateDep"].astype(str)
 
         sheets["StaffMembers"]["vaccination status"] = sheets["StaffMembers"]["vaccination status"].astype(bool)
+        sheets["StaffMembers"]["date of birth"] = sheets["StaffMembers"]["date of birth"].astype(str)
+
+        sheets["Vaccinations"]["date"] = sheets["Vaccinations"]["date"].astype(str)
+
+        sheets["Patients"]["date of birth"] = sheets["Patients"]["date of birth"].astype(str)
+
+        sheets["VaccinePatients"]["date"] = sheets["VaccinePatients"]["date"].astype(str)
 
         sheets["Symptoms"]["criticality"] = sheets["StaffMembers"]["vaccination status"].astype(bool)
+
+        sheets["Diagnosis"]["date"] = sheets["Diagnosis"]["date"].astype(str)
 
         Manufacturer = sheets["Manufacturer"][["ID", "phone"]].rename(columns={"ID": "id"}).rename(columns=str.lower)
         ProductionFacility = sheets["Manufacturer"][["ID", "country"]].rename(columns={"ID": "manufacturer"}) \
@@ -43,18 +57,16 @@ def main():
             .rename(columns={"ID": "id", "doses": "requiredDoses"}).rename(columns=str.lower)
         License = sheets["Manufacturer"][["ID", "vaccine"]].rename(columns={"ID": "manufacturer"}).rename(columns=str.lower)
         VaccinationPoint = sheets["VaccinationStations"].rename(columns=str.lower)
-        Batch = sheets["VaccineBatch"] \
-            [["batchID", "type", "amount", "manufacturer", "manufDate", "expiration", "location"]] \
+        Batch = sheets["VaccineBatch"][["batchID", "type", "amount", "manufacturer", "manufDate", "expiration", "location"]] \
             .rename(columns={"batchID": "ID", "type": "vaccine", "manufDate": "productionDate", "expiration": "expiryDate"}) \
             .rename(columns=str.lower)
-        TransportationLog = sheets["Transportation log"] \
-            [["batchID", "dateDep", "departure", "dateArr", "arrival"]] \
+        TransportationLog = sheets["Transportation log"][["batchID", "dateDep", "departure", "dateArr", "arrival"]] \
             .rename(columns={"batchID": "batch", "dateDep": "departureDate", "departure": "departurePoint", "dateArr": "arrivalDate", "arrival": "arrivalPoint"}) \
             .rename(columns=str.lower)
         Employee = sheets["StaffMembers"] \
             .rename(columns={"social security number": "ssNo", "date of birth": "birthday", "vaccination status": "vaccinationStatus", "hospital": "vaccinationPoint"}) \
             .rename(columns=str.lower)
-        Shift = sheets["Shifts"].rename(columns={"station": "vaccinationPoint", "worker": "employee"}) \
+        Shift = sheets["Shifts"][["weekday", "worker"]].rename(columns={"worker": "employee"}) \
             .rename(columns=str.lower)
         VaccinationEvent = sheets["Vaccinations"].rename(columns={"location": "vaccinationPoint", "batchID": "batch"}) \
             .rename(columns=str.lower)
