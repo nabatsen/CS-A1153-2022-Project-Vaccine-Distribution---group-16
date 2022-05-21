@@ -42,8 +42,8 @@ CREATE TABLE Batch(
     amount INTEGER NOT NULL,
     manufacturer VARCHAR NOT NULL REFERENCES Manufacturer(id) ON UPDATE CASCADE,
     productionDate VARCHAR NOT NULL,
-    location VARCHAR REFERENCES VaccinationPoint(name),
-    expiryDate VARCHAR NOT NULL
+    expiryDate VARCHAR NOT NULL,
+    location VARCHAR REFERENCES VaccinationPoint(name)
 );
 
 CREATE TABLE TransportationLog(
@@ -60,8 +60,8 @@ CREATE TABLE Employee(
     name VARCHAR NOT NULL,
     birthday VARCHAR NOT NULL,
     phone VARCHAR NOT NULL,
-    vaccinationStatus INTEGER NOT NULL,
     role VARCHAR NOT NULL CHECK(role IN ('doctor', 'nurse')),
+    vaccinationStatus BOOLEAN NOT NULL,
     vaccinationPoint VARCHAR NOT NULL REFERENCES VaccinationPoint(name)
 );
 
@@ -95,14 +95,14 @@ CREATE TABLE Patient(
 CREATE TABLE VaccinationAppointment(
     patient VARCHAR REFERENCES Patient(ssNo) ON DELETE CASCADE,
     date VARCHAR NOT NULL,
-    point VARCHAR NOT NULL,
-    PRIMARY KEY(patient, date, point),
-    FOREIGN KEY(date, point) REFERENCES VaccinationEvent(date, vaccinationPoint)
+    vaccinationPoint VARCHAR NOT NULL,
+    PRIMARY KEY(patient, date, vaccinationPoint),
+    FOREIGN KEY(date, vaccinationPoint) REFERENCES VaccinationEvent(date, vaccinationPoint)
 );
 
 CREATE TABLE Symptom(
     name VARCHAR PRIMARY KEY,
-    critical BOOLEAN NOT NULL
+    criticality BOOLEAN NOT NULL
 );
 
 CREATE TABLE Diagnosis(
