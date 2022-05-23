@@ -26,7 +26,17 @@ WHERE id = batch AND name = arrivalPoint AND NOT EXISTS(
 ) AND location != arrivalPoint
 ORDER BY id;
 
+-- Query 4
+SELECT P.ssNo, P.name, Vaccinationevent.batch, Batch.vaccine, Vaccinationappointment.date, Vaccinationappointment.vaccinationpoint FROM 
+(SELECT Patient.name, Patient.ssNo, Diagnosis.symptom FROM Patient, Diagnosis WHERE Patient.ssNo = Diagnosis.patient AND Diagnosis.date > '2021-05-10' GROUP BY name, ssNo, symptom HAVING Diagnosis.symptom IN 
+(SELECT name FROM Symptom WHERE criticality = 't')) AS P, Vaccinationevent, Batch, Vaccinationappointment WHERE 
+Vaccinationappointment.patient = P.ssNo AND Vaccinationevent.batch = Batch.id AND Vaccinationevent.vaccinationpoint = Vaccinationappointment.vaccinationpoint AND 
+Vaccinationevent.date = Vaccinationappointment.date;
+
+
+
 -- Query 6
+
 SELECT location AS "Hospital/Clinic", name AS vaccine, total AS "No. of vaccines of different types", SUM(total) OVER (PARTITION BY location) AS "No. of Vaccine" 
 FROM(SELECT location, Vaccine.name, SUM(amount) AS total 
         FROM Batch JOIN Vaccine ON Vaccine.id = Batch.vaccine 
