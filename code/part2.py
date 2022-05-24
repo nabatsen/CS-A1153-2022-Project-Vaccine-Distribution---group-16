@@ -46,7 +46,7 @@ def main():
 
         sheets["VaccinePatients"]["date"] = sheets["VaccinePatients"]["date"].astype(str)
 
-        sheets["Symptoms"]["criticality"] = sheets["StaffMembers"]["vaccination status"].astype(bool)
+        sheets["Symptoms"]["criticality"] = sheets["Symptoms"]["criticality"].astype(bool)
 
         sheets["Diagnosis"]["date"] = sheets["Diagnosis"]["date"].astype(str)
 
