@@ -44,13 +44,17 @@ WHERE Vaccinationappointment.patient = P.ssNo AND Vaccinationevent.batch = Batch
 -- Query 5
 CREATE VIEW patientVaccinationStatus AS 
 SELECT ssNo, name, birthday, gender, CASE WHEN ssNo IN (
-    SELECT patient FROM (
-        SELECT patient, MIN(requiredDoses) AS neededDoses, COUNT(*) AS takenDoses
+    SELECT dosesTaken.patient FROM (
+        SELECT patient, COUNT(*) AS doses
+        FROM VaccinationAppointment
+        GROUP BY patient
+    ) as dosesTaken, (
+        SELECT patient, requiredDoses AS doses
         FROM VaccinationAppointment AS A, VaccinationEvent AS E, Batch, Vaccine
         WHERE A.date=E.date AND A.vaccinationPoint=E.vaccinationPoint AND E.batch=Batch.ID AND Batch.vaccine=vaccine.id
-        GROUP BY patient
-    ) as p
-    WHERE p.takenDoses >= p.neededDoses
+            AND NOT EXISTS(SELECT 1 FROM VaccinationAppointment WHERE VaccinationAppointment.date<A.date)
+    ) as dosesRequired
+    WHERE dosesTaken.patient=dosesRequired.patient AND dosesTaken.doses >= dosesRequired.doses
 ) THEN TRUE ELSE FALSE END AS VaccinationStatus
 FROM Patient;
 
