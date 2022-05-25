@@ -55,7 +55,7 @@ SELECT ssNo, name, birthday, gender, CASE WHEN ssNo IN (
             AND NOT EXISTS(SELECT 1 FROM VaccinationAppointment WHERE VaccinationAppointment.date<A.date)
     ) as dosesRequired
     WHERE dosesTaken.patient=dosesRequired.patient AND dosesTaken.doses >= dosesRequired.doses
-) THEN TRUE ELSE FALSE END AS VaccinationStatus
+) THEN 1 ELSE 0 END AS VaccinationStatus
 FROM Patient;
 
 -- Query 6
