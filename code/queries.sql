@@ -60,16 +60,10 @@ FROM Patient;
 
 -- Query 6
 -- part 1
-SELECT location AS "Hospital/Clinic", SUM(amount) AS "Total No of vaccines"
-FROM Batch
-GROUP BY location
-ORDER BY location;
-
---part 2
-SELECT location AS "Hospital/Clinic", Vaccine.name AS "Vaccine type", SUM(amount) AS "No. of vaccines of this type"
-FROM Batch JOIN Vaccine ON Vaccine.id = Batch.vaccine 
-GROUP BY location, Vaccine.name
-ORDER BY location, Vaccine.name;
+SELECT location AS "Hospital/Clinic", name AS vaccine, total AS "No. of vaccines of different types", SUM(total) OVER (PARTITION BY location) AS "No. of Vaccine" 
+FROM(SELECT location, Vaccine.name, SUM(amount) AS total 
+        FROM Batch JOIN Vaccine ON Vaccine.id = Batch.vaccine 
+        GROUP BY location, Vaccine.name) AS tempTable;
 
 --Query 7
 WITH Tables AS(SELECT VA.patient as patientid, Vaccine.name, VA.date
