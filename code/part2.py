@@ -6,6 +6,8 @@ VERBOSE = False
 
 def main():
     try:
+        pd.options.display.max_columns = 500
+        pd.options.display.width = 0
         DIALECT = "postgresql+psycopg2://"
         database = "grp16_vaccinedist"
         user = "grp16"
@@ -31,24 +33,24 @@ def main():
         sheets["VaccineType"] = vaccine_type_df
 
         sheets["VaccineBatch"]["amount"] = sheets["VaccineBatch"]["amount"].astype(int)
-        sheets["VaccineBatch"]["manufDate"] = sheets["VaccineBatch"]["manufDate"].astype(str)
-        sheets["VaccineBatch"]["expiration"] = sheets["VaccineBatch"]["expiration"].astype(str)
+        sheets["VaccineBatch"]["manufDate"] = sheets["VaccineBatch"]["manufDate"].astype(str).apply(lambda date: date.split(" ")[0])
+        sheets["VaccineBatch"]["expiration"] = sheets["VaccineBatch"]["expiration"].astype(str).apply(lambda date: date.split(" ")[0])
 
-        sheets["Transportation log"]["dateArr"] = sheets["Transportation log"]["dateArr"].astype(str)
-        sheets["Transportation log"]["dateDep"] = sheets["Transportation log"]["dateDep"].astype(str)
+        sheets["Transportation log"]["dateArr"] = sheets["Transportation log"]["dateArr"].astype(str).apply(lambda date: date.split(" ")[0])
+        sheets["Transportation log"]["dateDep"] = sheets["Transportation log"]["dateDep"].astype(str).apply(lambda date: date.split(" ")[0])
 
         sheets["StaffMembers"]["vaccination status"] = sheets["StaffMembers"]["vaccination status"].astype(bool)
-        sheets["StaffMembers"]["date of birth"] = sheets["StaffMembers"]["date of birth"].astype(str)
+        sheets["StaffMembers"]["date of birth"] = sheets["StaffMembers"]["date of birth"].astype(str).apply(lambda date: date.split(" ")[0])
 
-        sheets["Vaccinations"]["date"] = sheets["Vaccinations"]["date"].astype(str)
+        sheets["Vaccinations"]["date"] = sheets["Vaccinations"]["date"].astype(str).apply(lambda date: date.split(" ")[0])
 
-        sheets["Patients"]["date of birth"] = sheets["Patients"]["date of birth"].astype(str)
+        sheets["Patients"]["date of birth"] = sheets["Patients"]["date of birth"].astype(str).apply(lambda date: date.split(" ")[0])
 
-        sheets["VaccinePatients"]["date"] = sheets["VaccinePatients"]["date"].astype(str)
+        sheets["VaccinePatients"]["date"] = sheets["VaccinePatients"]["date"].astype(str).apply(lambda date: date.split(" ")[0])
 
         sheets["Symptoms"]["criticality"] = sheets["Symptoms"]["criticality"].astype(bool)
 
-        sheets["Diagnosis"]["date"] = sheets["Diagnosis"]["date"].astype(str)
+        sheets["Diagnosis"]["date"] = sheets["Diagnosis"]["date"].astype(str).apply(lambda date: date.split(" ")[0])
 
         Manufacturer = sheets["Manufacturer"][["ID", "phone"]].rename(columns={"ID": "id"}).rename(columns=str.lower)
         ProductionFacility = sheets["Manufacturer"][["ID", "country"]].rename(columns={"ID": "manufacturer"}) \
@@ -122,6 +124,9 @@ def main():
             print(Diagnosis)
     except Exception as e:
         print(e)
+    finally:
+        if conn:
+            conn.close()
 
 
 main()
