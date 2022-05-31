@@ -110,6 +110,7 @@ def main():
         print("------------------------------------------------------------------------------------------------------")
 
         # Task 7
+        ##########
         Frequency = pd.read_sql_query("""WITH Tables AS(SELECT VA.patient as patientid, Vaccine.name, VA.date
                                         FROM VaccinationAppointment VA
                                         JOIN VaccinationEvent VE ON VE.date = VA.date AND VE.vaccinationPoint = VA.vaccinationPoint
@@ -128,14 +129,13 @@ def main():
         Frequency.to_sql("Frequency", conn, index=True, if_exists="replace")  # dataframe
         Symptoms = pd.read_sql_query("""SELECT name AS symptom FROM Symptom ORDER BY name;""", conn)
         Symptoms.to_sql("Symptoms", conn, index=True, if_exists="replace")
-
-        print("Task 7\n")
+        
         FreqAstra = Frequency[:13].reset_index().drop(columns=['index', 'Vaccine']).sort_values(by=['symptom'])
         FreqComirnaty = Frequency[14:23].reset_index().drop(columns=['index', 'Vaccine']).sort_values(by=['symptom'])
         FreqModerna = Frequency[24:].reset_index().drop(columns=['index', 'Vaccine']).sort_values(by=['symptom'])
         merge_df = pd.merge(Symptoms, FreqAstra, how='left', on='symptom')
-        merge_df = pd.merge(merge_df, FreqModerna, how='left', on='symptom')
         merge_df = pd.merge(merge_df, FreqComirnaty, how='left', on='symptom')
+        merge_df = pd.merge(merge_df, FreqModerna, how='left', on='symptom')
         merge_df.rename(columns={"Frequency_x": "V01", "Frequency_y": "V02", "Frequency": "V03"}, inplace=True)
         cols = ['V01', 'V02', 'V03']
         merge_df[cols] = merge_df[cols].apply(pd.to_numeric, errors='coerce', axis=1)
@@ -145,8 +145,10 @@ def main():
                                  right=False).values.add_categories('-')
         merge_df['V03'] = pd.cut(merge_df['V03'], [0.0001, 0.05, 0.1, 1], labels=["rare", "common", "very common"],
                                  right=False).values.add_categories('-')
-
-        print(merge_df.fillna('-'))
+        merge_df = merge_df.fillna('-')
+        ##########
+        print("Task 7\n")
+        print(merge_df)
         print("------------------------------------------------------------------------------------------------------")
     except Exception as e:
         print(e)
