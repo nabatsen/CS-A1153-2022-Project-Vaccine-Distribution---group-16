@@ -108,8 +108,9 @@ def main():
         print("Task 6")
         print(percentages)
         print("------------------------------------------------------------------------------------------------------")
-        
+
         # Task 7
+        # Have not changed to label
         Frequency = pd.read_sql_query("""WITH Tables AS(SELECT VA.patient as patientid, Vaccine.name, VA.date
                                         FROM VaccinationAppointment VA
                                         JOIN VaccinationEvent VE ON VE.date = VA.date AND VE.vaccinationPoint = VA.vaccinationPoint
