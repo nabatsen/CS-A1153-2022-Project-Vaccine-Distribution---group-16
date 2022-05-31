@@ -108,6 +108,41 @@ def main():
         print("Task 6")
         print(percentages)
         print("------------------------------------------------------------------------------------------------------")
+        
+        # Task 7
+        Frequency = pd.read_sql_query("""WITH Tables AS(SELECT VA.patient as patientid, Vaccine.name, VA.date
+                                        FROM VaccinationAppointment VA
+                                        JOIN VaccinationEvent VE ON VE.date = VA.date AND VE.vaccinationPoint = VA.vaccinationPoint
+                                        JOIN Batch ON Batch.id = VE.batch
+                                        JOIN Vaccine ON Vaccine.id = Batch.vaccine
+                                        ),
+                                        SymptomOccurences AS(SELECT name, symptom, COUNT(DISTINCT(Tables.patientid)) AS total
+                                        FROM Tables JOIN Diagnosis D ON D.patient = Tables.patientID AND D.date > Tables.date
+                                        GROUP BY name, symptom),
+                                        TotalVaccinations AS(SELECT name, COUNT(DISTINCT(patientid)) AS total
+                                        FROM Tables GROUP BY name)
+                                        SELECT SO.name AS "Vaccine", SO.symptom,
+                                        ROUND(SO.total*1.0/TV.total, 6) AS "Frequency"
+                                        FROM SymptomOccurences AS SO JOIN TotalVaccinations AS TV ON SO.name = TV.name;""", conn)
+
+        Frequency.to_sql("Frequency", conn, index=True, if_exists="replace")  # dataframe
+        Symptoms = pd.read_sql_query("""SELECT name AS symptom FROM Symptom ORDER BY name;""", conn)
+        Symptoms.to_sql("Symptoms", conn, index=True, if_exists="replace")
+
+        print("Task 7\n")
+        FreqAstra = Frequency[:13].reset_index().drop(columns=['index', 'Vaccine']).sort_values(by=['symptom'])
+        FreqComirnaty = Frequency[14:23].reset_index().drop(columns=['index', 'Vaccine']).sort_values(by=['symptom'])
+        FreqModerna = Frequency[24:].reset_index().drop(columns=['index', 'Vaccine']).sort_values(by=['symptom'])
+        print('-'*20)
+        print(Frequency)
+        merge_df = pd.merge(Symptoms, FreqAstra, how='left', on='symptom')
+        merge_df = pd.merge(merge_df, FreqModerna, how='left', on='symptom')
+        merge_df = pd.merge(merge_df, FreqComirnaty, how='left', on='symptom')
+        merge_df.rename(columns={"Frequency_x": "V01", "Frequency_y": "V02", "Frequency": "V03"}, inplace=True)
+        cols = ['V01', 'V02', 'V03']
+        merge_df[cols] = merge_df[cols].apply(pd.to_numeric, errors='coerce', axis=1)
+
+        print(merge_df.fillna('-'))
     except Exception as e:
         print(e)
     finally:
