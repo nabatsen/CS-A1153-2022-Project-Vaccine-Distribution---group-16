@@ -2,6 +2,7 @@ from sqlalchemy import create_engine
 import pandas as pd
 from datetime import datetime
 from dateutil import relativedelta
+import numpy as np
 
 
 def main():
@@ -149,6 +150,88 @@ def main():
         ##########
         print("Task 7\n")
         print(merge_df)
+        print("------------------------------------------------------------------------------------------------------")
+
+        # Task 8
+        # From Vaccination Event, we know there are 5 days across 6 vaccination points, and there will be total 8
+        # vaccination events happen. I will implement query that find number of registered patient and the amount of
+        # vaccine in the batch that the vaccination point will use at a specific date. The date and vaccination point
+        # are from the table VaccinationEvent.
+
+        # Information from VaccinationEvent table
+        VaccinationEvent = pd.read_sql_query("""SELECT * FROM VaccinationEvent;""", conn)
+        VaccinationEvent.to_sql("VaccinationEvent", conn, index=False, if_exists="replace")
+
+        # Get amount of vaccine and type
+        messukeskus_d1 = pd.read_sql_query("""SELECT vaccine, amount FROM Batch WHERE id IN (SELECT batch FROM 
+                            VaccinationEvent WHERE date='2021-01-30' AND vaccinationPoint='Messukeskus');""", conn)
+        messukeskus_d2 = pd.read_sql_query("""SELECT vaccine, amount FROM Batch WHERE id IN (SELECT batch FROM 
+                                    VaccinationEvent WHERE date='2021-02-14' AND vaccinationPoint='Messukeskus');""",
+                                           conn)
+        tapiola_d1 = pd.read_sql_query("""SELECT vaccine, amount FROM Batch WHERE id IN (SELECT batch FROM 
+                                    VaccinationEvent WHERE date='2021-03-16' AND vaccinationPoint='Tapiola Health Center');""",
+                                           conn)
+        tapiola_d2 = pd.read_sql_query("""SELECT vaccine, amount FROM Batch WHERE id IN (SELECT batch FROM 
+                                            VaccinationEvent WHERE date='2021-05-10' AND vaccinationPoint='Tapiola Health Center');""",
+                                       conn)
+        myyrmaki = pd.read_sql_query("""SELECT vaccine, amount FROM Batch WHERE id IN (SELECT batch FROM 
+                                    VaccinationEvent WHERE vaccinationPoint='Myyrmäki Energia Areena');""", conn)
+        malmi = pd.read_sql_query("""SELECT vaccine, amount FROM Batch WHERE id IN (SELECT batch FROM 
+                                    VaccinationEvent WHERE vaccinationPoint='Malmi');""", conn)
+        iso_omena = pd.read_sql_query("""SELECT vaccine, amount FROM Batch WHERE id IN (SELECT batch FROM 
+                                    VaccinationEvent WHERE vaccinationPoint='Iso Omena Vaccination Point');""", conn)
+        sanomala = pd.read_sql_query("""SELECT vaccine, amount FROM Batch WHERE id IN (SELECT batch FROM 
+                                    VaccinationEvent WHERE vaccinationPoint='Sanomala Vaccination Point');""", conn)
+
+        # Get number of registered patient
+        p_messu_d1 = pd.read_sql_query("""SELECT COUNT(patient) FROM VaccinationAppointment AS VA WHERE 
+                                        VA.date='2021-01-30' AND VA.vaccinationPoint='Messukeskus';""", conn)
+        p_messu_d2 = pd.read_sql_query("""SELECT COUNT(patient) FROM VaccinationAppointment AS VA WHERE 
+                                        VA.date='2021-02-14' AND VA.vaccinationPoint='Messukeskus';""", conn)
+        p_tapiola_d1 = pd.read_sql_query("""SELECT COUNT(patient) FROM VaccinationAppointment AS VA WHERE 
+                                        VA.date='2021-03-16' AND VA.vaccinationPoint='Tapiola Health Center';""", conn)
+        p_tapiola_d2 = pd.read_sql_query("""SELECT COUNT(patient) FROM VaccinationAppointment AS VA WHERE 
+                                        VA.date='2021-05-10' AND VA.vaccinationPoint='Tapiola Health Center';""", conn)
+        p_myyrmaki = pd.read_sql_query("""SELECT COUNT(patient) FROM VaccinationAppointment AS VA WHERE 
+                                        VA.vaccinationPoint='Myyrmäki Energia Areena';""", conn)
+        p_malmi = pd.read_sql_query("""SELECT COUNT(patient) FROM VaccinationAppointment AS VA WHERE 
+                                        VA.vaccinationPoint='Malmi';""", conn)
+        p_isoomena = pd.read_sql_query("""SELECT COUNT(patient) FROM VaccinationAppointment AS VA WHERE 
+                                        VA.vaccinationPoint='Iso Omena Vaccination Point';""", conn)
+        p_sanomala = pd.read_sql_query("""SELECT COUNT(patient) FROM VaccinationAppointment AS VA WHERE 
+                                        VA.vaccinationPoint='Sanomala Vaccination Point';""", conn)
+
+        # For V01: Messukeskus on 2021-01-30, Sanomala on 2021-05-10, Tapiola Health Center on 2021-03-16
+        # For V02: Tapiola Health Center on 2021-05-10, Myyramaki Energua Areena on 2021-05-10
+        # For V03: Iso Omena on 2021-05-14, Malmi on 2021-01-30, Messukeskus on 2021-02-14
+
+        V01_amount = [messukeskus_d1['amount'].iloc[0], sanomala['amount'].iloc[0], tapiola_d1['amount'].iloc[0]]
+        V02_amount = [tapiola_d2['amount'].iloc[0], myyrmaki['amount'].iloc[0]]
+        V03_amount = [iso_omena['amount'].iloc[0], malmi['amount'].iloc[0], messukeskus_d2['amount'].iloc[0]]
+
+        V01_patient = [p_messu_d1['count'].iloc[0], p_sanomala['count'].iloc[0], p_tapiola_d1['count'].iloc[0]]
+        V02_patient = [p_tapiola_d2['count'].iloc[0], p_myyrmaki['count'].iloc[0]]
+        V03_patient = [p_isoomena['count'].iloc[0], p_malmi['count'].iloc[0], p_messu_d2['count'].iloc[0]]
+
+        V01_percentage = [V01_patient[0]*100/V01_amount[0], V01_patient[1]*100/V01_amount[1],
+                          V01_patient[2]*100/V01_amount[2]]
+        V02_percentage = [V02_patient[0] * 100 / V02_amount[0], V02_patient[1] * 100 / V02_amount[1]]
+        V03_percentage = [V03_patient[0] * 100 / V03_amount[0], V03_patient[1] * 100 / V03_amount[1],
+                          V03_patient[2] * 100 / V03_amount[2]]
+
+        V01_expected = np.mean(V01_percentage) + np.std(V01_percentage)
+        V02_expected = np.mean(V02_percentage) + np.std(V02_percentage)
+        V03_expected = np.mean(V03_percentage) + np.std(V03_percentage)
+
+        # Print result
+        print('Task 8\n')
+        print('Base information from VaccinationEvent table:')
+        print(VaccinationEvent, '\n')
+        print('Estimation')
+
+        print('V01: {:.5f}%'.format(V01_expected))
+        print('V02: {:.5f}%'.format(V02_expected))
+        print('V03: {:.5f}%'.format(V03_expected))
         print("------------------------------------------------------------------------------------------------------")
     except Exception as e:
         print(e)
