@@ -235,6 +235,7 @@ def main():
         print("------------------------------------------------------------------------------------------------------")
         
         # Task 9: 
+        print("Task 9")
         PatientVaccineInfoDF = pd.read_sql("""SELECT * FROM "PatientVaccineInfo"; """, engine)
         # print(PatientVaccineInfoDF['date1'].values.tolist())
         # print(PatientVaccineInfoDF['date2'].values.tolist())
@@ -267,11 +268,23 @@ def main():
         plt.ylabel('Vaccinated Patients at Date')
         plt.title('Vaccinations according to date')
         plt.show()
+        # Task 10
+        print("Task 10")
+        ssNOAndNamedf = pd.read_sql_query("""SELECT patient AS ssNO, name AS Name FROM Vaccinationappointment INNER JOIN 
+                                          Patient ON Vaccinationappointment.patient = Patient.ssno 
+                                          WHERE vaccinationpoint IN (SELECT vaccinationpoint FROM Employee 
+                                          WHERE ssno = '19740919-7140') AND date <= '2021-05-15' AND date >= '2021-05-05' 
+                                          UNION SELECT ssno, name FROM Employee WHERE vaccinationpoint 
+                                          IN (SELECT vaccinationpoint FROM Employee WHERE ssno = '19740919-7140') AND ssno != '19740919-7140'""")
+        print(ssNOAndNamedf)
     except Exception as e:
         print(e)
     finally:
         if conn:
             conn.close()
+            
+    
+    
 
 
 main()
