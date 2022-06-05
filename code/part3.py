@@ -4,7 +4,7 @@ from datetime import datetime
 from dateutil import relativedelta
 import numpy as np
 
-
+import matplotlib.pyplot as plt
 def main():
     try:
         pd.options.display.max_columns = 500
@@ -233,6 +233,40 @@ def main():
         print('V02: {:.5f}%'.format(V02_expected))
         print('V03: {:.5f}%'.format(V03_expected))
         print("------------------------------------------------------------------------------------------------------")
+        
+        # Task 9: 
+        PatientVaccineInfoDF = pd.read_sql("""SELECT * FROM "PatientVaccineInfo"; """, engine)
+        # print(PatientVaccineInfoDF['date1'].values.tolist())
+        # print(PatientVaccineInfoDF['date2'].values.tolist())
+        date1List = PatientVaccineInfoDF['date1'].values.tolist()
+        date2List = PatientVaccineInfoDF['date2'].values.tolist()
+        
+        date1Dictionary = {}
+        for i in date1List:
+            if i != None:
+                date1Dictionary[i] = date1List.count(i)
+        
+        date2Dictionary = {}
+        for i in date2List:
+            if i != None:
+                date2Dictionary[i] = date2List.count(i)
+        
+        vaccinatedDictionary = {}
+        
+        for i in date1Dictionary:
+            if i in date2Dictionary:
+                vaccinatedDictionary[i] = date1Dictionary[i] + date2Dictionary[i]
+            else:
+                vaccinatedDictionary[i] = date1Dictionary[i]
+        
+        mainList = vaccinatedDictionary.items()
+        mainList = sorted(mainList)
+        x , y = zip(*mainList)        
+        plt.plot(x,y)
+        plt.xlabel('Date')
+        plt.ylabel('Vaccinated Patients at Date')
+        plt.title('Vaccinations according to date')
+        plt.show()
     except Exception as e:
         print(e)
     finally:
